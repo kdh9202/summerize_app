@@ -8,16 +8,19 @@ import openai
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 ##### 기능 구현 함수 #####
-def summarize_text(prompt):
+def summarize_text(text):
     """ChatGPT를 사용하여 텍스트를 요약합니다."""
     try:
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
-            prompt=prompt,
+            messages=[
+                {"role": "system", "content": "You are an assistant that summarizes text into 3 concise sentences."},
+                {"role": "user", "content": text}
+            ],
             max_tokens=150,
             temperature=0.7
         )
-        summary = response.choices[0].text.strip()
+        summary = response.choices[0].message.content.strip()
         return summary
     except Exception as e:
         return f"오류 발생: {e}"
@@ -36,13 +39,8 @@ def main():
 
     if st.button("요약하기"):
         if text.strip():
-            # 요약 프롬프트 생성
-            prompt = f"""
-            다음 텍스트를 3문장으로 요약해주세요:
-            {text}
-            """
             # ChatGPT로 요약 요청
-            summary = summarize_text(prompt)
+            summary = summarize_text(text)
 
             # 결과 표시
             st.subheader("요약 결과")
