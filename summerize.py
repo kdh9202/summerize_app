@@ -16,11 +16,9 @@ def summarize_text(text):
             messages=[
                 {"role": "system", "content": "You are an assistant that summarizes text into 3 concise sentences."},
                 {"role": "user", "content": text}
-            ],
-            max_tokens=150,
-            temperature=0.7
+            ]
         )
-        summary = response.choices[0].message.content.strip()
+        summary = response["choices"][0]["message"]["content"].strip()
         return summary
     except Exception as e:
         return f"오류 발생: {e}"
