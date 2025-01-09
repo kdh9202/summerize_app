@@ -25,9 +25,9 @@ def summarize_text(prompt):
 ##### 메인 함수 #####
 def main():
     # 페이지 구성
-    st.set_page_config(page_title="텍스트 요약 앱", page_icon="\ud83d\uddcb")
+    st.set_page_config(page_title="텍스트 요약 앱")
 
-    st.title("\ud83d\uddcb 텍스트 요약 프로그램")
+    st.title("텍스트 요약 프로그램")
     st.markdown("이 앱은 입력된 텍스트를 ChatGPT를 사용하여 3문장으로 요약합니다.")
     st.markdown('---')
 
